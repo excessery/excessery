@@ -1,6 +1,7 @@
 # Excessery
-
+We submitted this project to [OrionHacks](https://devpost.com/software/excessery).
 Excessery is an app tackling the issue of food waste by connecting restaurants, shops, cafes and grocery stores that have surplus foods to people willing to buy it at a discounted price, so it prevent the foods being thrown away. Save foods, Save wallet and Save planet at the same time!
+![alt text](https://i.imgur.com/tlixfhH.jpg)
 
 ### Key features:
 
