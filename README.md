@@ -1,4 +1,4 @@
-![alt text](https://i.ibb.co/NC2z1Lg/Jaga-Bumi-mockup.png)
+![alt text](https://pasteboard.co/JK5MW9k.jpg)
 
 # Excessery
 We submitted this project to [OrionHacks](https://devpost.com/software/excessery).
