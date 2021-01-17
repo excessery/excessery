@@ -1,4 +1,5 @@
 import 'package:excessery/pages/homepage.dart';
+import 'package:excessery/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +25,7 @@ class _MyAppState extends State<Splash> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Home(),
+            builder: (context) => HomePage(), //change it to login
           ),
         );
       },
