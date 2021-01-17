@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         elevation: 0.0,
-        items: [Icons.explore, Icons.person, Icons.note, Icons.info]
+        items: [Icons.explore, Icons.person, Icons.note, Icons.person]
             .asMap()
             .map((key, value) => MapEntry(
                   key,

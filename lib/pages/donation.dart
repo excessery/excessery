@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class Donation extends StatefulWidget {
   @override
@@ -15,7 +17,7 @@ class _DonationState extends State<Donation> {
         physics: ClampingScrollPhysics(),
         slivers: <Widget>[
           _buildHeader(screenHeight),
-          _foodList(screenHeight),
+          _orgList(screenHeight),
         ],
       ),
     );
@@ -75,7 +77,6 @@ class _DonationState extends State<Donation> {
                     Image.asset('assets/kindness.png')
                   ],
                 ),
-                SizedBox(height: screenHeight * 0.03),
               ],
             )
           ],
@@ -92,34 +93,159 @@ class _DonationState extends State<Donation> {
     });
   }
 
-  SliverToBoxAdapter _foodList(double screenHeight) {
+  SliverToBoxAdapter _orgList(double screenHeight) {
     return SliverToBoxAdapter(
         child: SingleChildScrollView(
             child: Column(
       children: [
-        Card(
-          child: ListTile(
-              leading: Image.network(''),
-              title: Text('Pizza Hut Delivery'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite,
-                    color: _selectedIndex != null && _selectedIndex == 1
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
+        SizedBox(height: screenHeight * 0.01),
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Donations',
+            style: GoogleFonts.roboto(
+              textStyle: TextStyle(
+                color: Color(0xff324982),
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: screenHeight * 0.01),
+        SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(children: <Widget>[
+              SizedBox(
+                width: 10,
+              ),
+              RaisedButton(
+                  elevation: 0,
+                  child: Text(
+                    'All',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                        color: Color(0xff324982),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                  onPressed: () {
-                    _onSelected(1);
-                  })),
-          color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      side: BorderSide(color: Colors.black12)),
+                  onPressed: () {}),
+              SizedBox(
+                width: 10,
+              ),
+              RaisedButton(
+                  elevation: 0,
+                  child: Text(
+                    'Orphanage',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                        color: Color(0xff324982),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      side: BorderSide(color: Colors.black12)),
+                  onPressed: () {}),
+              SizedBox(
+                width: 10,
+              ),
+              RaisedButton(
+                  elevation: 0,
+                  child: Text(
+                    'Disaster Relief',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                        color: Color(0xff324982),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      side: BorderSide(color: Colors.black12)),
+                  onPressed: () {}),
+              SizedBox(
+                width: 10,
+              ),
+              RaisedButton(
+                  elevation: 0,
+                  child: Text(
+                    'Social Weldfare',
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                        color: Color(0xff324982),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      side: BorderSide(color: Colors.black12)),
+                  onPressed: () {}),
+              SizedBox(
+                width: 10,
+              ),
+            ])),
+        SizedBox(height: screenHeight * 0.01),
+        new Card(
+          elevation: 5,
+          child: new Container(
+            child: new Column(
+              children: <Widget>[
+                Image.asset('assets/asrama.png'),
+                SizedBox(height: screenHeight * 0.02),
+                Text('Orphanage'),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text('The Orphanage Boarding School'),
+                        SizedBox(
+                          width: 80,
+                        ),
+                        Text(
+                          '75%',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff35A2FF)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: new LinearPercentIndicator(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    lineHeight: 14.0,
+                    percent: 0.75,
+                    backgroundColor: Colors.grey,
+                    progressColor: Color(0xff35A2FF),
+                  ),
+                ),
+              ],
+            ),
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           ),
         ),
+        SizedBox(height: screenHeight * 0.01),
       ],
     )));
   }
