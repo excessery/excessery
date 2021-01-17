@@ -1,4 +1,7 @@
-# excessery
+![alt text](https://i.ibb.co/DWfnG7P/Jaga-Bumi-mockup.png)
+
+# Excessery
+We submitted this project to [OrionHacks](https://devpost.com/software/excessery).
 
 A new Flutter project.
 
