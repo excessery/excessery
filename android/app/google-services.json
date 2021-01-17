@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1010564576831",
+    "project_id": "excessery-62c27",
+    "storage_bucket": "excessery-62c27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010564576831:android:ff77d8b3f6db323e6aaa8a",
+        "android_client_info": {
+          "package_name": "com.excessery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010564576831-j0l3l4q47bom7u1tu6f3ovphl47v2h3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoihjv52Gy_a0o2uiexDbFTkUp_UD3SiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010564576831-j0l3l4q47bom7u1tu6f3ovphl47v2h3e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1010564576831-4rg34up937468jmuc2bkffu6rkelh06o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.excessery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
