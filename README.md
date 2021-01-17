@@ -1,4 +1,4 @@
-![alt text](https://pasteboard.co/JK5MW9k.jpg)
+![alt text](https://i.imgur.com/tlixfhH.jpg)
 
 # Excessery
 We submitted this project to [OrionHacks](https://devpost.com/software/excessery).
