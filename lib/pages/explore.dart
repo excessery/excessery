@@ -121,7 +121,7 @@ class _ExploreState extends State<Explore> {
                     'All',
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
-                        color: Color(0xff35A2FF),
+                        color: Color(0xff324982),
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
@@ -140,7 +140,7 @@ class _ExploreState extends State<Explore> {
                     'Restaurants',
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
-                        color: Color(0xff35A2FF),
+                        color: Color(0xff324982),
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
@@ -159,7 +159,7 @@ class _ExploreState extends State<Explore> {
                     'Cafes & Bakeries',
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
-                        color: Color(0xff35A2FF),
+                        color: Color(0xff324982),
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
@@ -178,7 +178,7 @@ class _ExploreState extends State<Explore> {
                     'Grocery Stores',
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
-                        color: Color(0xff35A2FF),
+                        color: Color(0xff324982),
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                       ),
