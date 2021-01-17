@@ -1,3 +1,4 @@
+import 'package:excessery/pages/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,9 +8,12 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  List<Restaurant> restaurants;
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: CustomAppBar(),
       body: CustomScrollView(
@@ -89,206 +93,143 @@ class _ExploreState extends State<Explore> {
   }
 
   SliverToBoxAdapter _foodList(double screenHeight) {
+    restaurants = new List<Restaurant>();
+    restaurants.add(new Restaurant("Taco Bell", "8pm", "10pm", 25));
+
     return SliverToBoxAdapter(
         child: SingleChildScrollView(
             child: Column(
-      children: [
-        SizedBox(height: screenHeight * 0.01),
-        Container(
-          margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
-          alignment: Alignment.topLeft,
-          child: Text(
-            'Explore Categories',
-            style: GoogleFonts.roboto(
-              textStyle: TextStyle(
-                color: Color(0xff324982),
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(children: <Widget>[
-              SizedBox(
-                width: 10,
-              ),
-              RaisedButton(
-                  elevation: 0,
+              children: [
+                SizedBox(height: screenHeight * 0.01),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                  alignment: Alignment.topLeft,
                   child: Text(
-                    'All',
+                    'Explore Categories',
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                         color: Color(0xff324982),
                         fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      side: BorderSide(color: Colors.black12)),
-                  onPressed: () {}),
-              SizedBox(
-                width: 10,
-              ),
-              RaisedButton(
-                  elevation: 0,
-                  child: Text(
-                    'Restaurants',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        color: Color(0xff324982),
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                ),
+                SizedBox(height: screenHeight * 0.01),
+                SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: <Widget>[
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      side: BorderSide(color: Colors.black12)),
-                  onPressed: () {}),
-              SizedBox(
-                width: 10,
-              ),
-              RaisedButton(
-                  elevation: 0,
-                  child: Text(
-                    'Cafes & Bakeries',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        color: Color(0xff324982),
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                      RaisedButton(
+                          elevation: 0,
+                          child: Text(
+                            'All',
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                color: Color(0xff324982),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              side: BorderSide(color: Colors.black12)),
+                          onPressed: () {}),
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      side: BorderSide(color: Colors.black12)),
-                  onPressed: () {}),
-              SizedBox(
-                width: 10,
-              ),
-              RaisedButton(
-                  elevation: 0,
-                  child: Text(
-                    'Grocery Stores',
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        color: Color(0xff324982),
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
+                      RaisedButton(
+                          elevation: 0,
+                          child: Text(
+                            'Restaurants',
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                color: Color(0xff324982),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              side: BorderSide(color: Colors.black12)),
+                          onPressed: () {}),
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      side: BorderSide(color: Colors.black12)),
-                  onPressed: () {}),
-              SizedBox(
-                width: 10,
-              ),
-            ])),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/pizzahut.png'),
-              title: Text('Pizza Hut Delivery'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 1
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(1);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/sushi.png'),
-              title: Text('Sushi Tei, Flavor Bliss'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 2
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(2);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/smile.png'),
-              title: Text('Mister Lie'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 3
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(3);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/kfc.png'),
-              title: Text('KFC'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 4
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(4);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-      ],
+                      RaisedButton(
+                          elevation: 0,
+                          child: Text(
+                            'Cafes & Bakeries',
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                color: Color(0xff324982),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              side: BorderSide(color: Colors.black12)),
+                          onPressed: () {}),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      RaisedButton(
+                          elevation: 0,
+                          child: Text(
+                            'Grocery Stores',
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                color: Color(0xff324982),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              side: BorderSide(color: Colors.black12)),
+                          onPressed: () {}),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ])),
+                Container(
+                  child: ListView.builder(
+                    itemCount: restaurants.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: ListTile(
+                            leading: Image.asset('assets/kfc.png'),
+                            title: Text(restaurants[index].name),
+                            contentPadding:
+                            EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                            subtitle: Text('Pickup from 8-10PM\n25 offers available'),
+                            isThreeLine: true,
+                            trailing: IconButton(
+                                icon: Icon(
+                                  Icons.favorite_rounded,
+                                  color: _selectedIndex != null && _selectedIndex == 4
+                                      ? Color(0xff35A2FF)
+                                      : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  _onSelected(4);
+                                })),
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      );
+                    }
+                  )
+                )
+              ],
     )));
   }
 }
