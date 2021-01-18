@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'dart:async';
+import 'package:firebase_database/firebase_database.dart';
+import 'Charity.dart';
 
 class Donation extends StatefulWidget {
   @override
@@ -8,9 +11,16 @@ class Donation extends StatefulWidget {
 }
 
 class _DonationState extends State<Donation> {
+  List<Charity> charities;
+  bool loaded = false;
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    if (!loaded)
+      getCharityData();
+    loaded = true;
+
     return Scaffold(
       appBar: CustomAppBar(),
       body: CustomScrollView(
@@ -21,6 +31,10 @@ class _DonationState extends State<Donation> {
         ],
       ),
     );
+  }
+
+  void getCharityData() {
+
   }
 
   SliverToBoxAdapter _buildHeader(double screenHeight) {
