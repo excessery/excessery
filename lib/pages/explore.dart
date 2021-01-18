@@ -265,7 +265,7 @@ class _ExploreState extends State<Explore> {
                             trailing: IconButton(
                                 icon: Icon(
                                   Icons.favorite_rounded,
-                                  color: _selectedIndex != null && _selectedIndex == 4
+                                  color: _selectedIndex != null && _selectedIndex == index
                                       ? Color(0xff35A2FF)
                                       : Colors.grey,
                                 ),
