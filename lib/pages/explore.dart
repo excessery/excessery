@@ -134,7 +134,8 @@ class _ExploreState extends State<Explore> {
             restaurants.add(new Restaurant(name, open, close, offers, icon));
           });
           this.setState(() {});
-      });
+      }
+    );
   }
 
   SliverToBoxAdapter _foodList(double screenHeight) {
