@@ -252,12 +252,16 @@ class _ExploreState extends State<Explore> {
                   child: ListView.builder(
                     itemCount: restaurants.length,
                     itemBuilder: (context, int index) {
+                      Restaurant current = restaurants[index];
                       return ListTile(
-                            leading: Image.asset(restaurants[index].icon),
-                            title: Text(restaurants[index].name),
+                            leading: Image.asset(current.icon),
+                            title: Text(current.name),
                             contentPadding:
                             EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                            subtitle: Text('Pickup from 8-10PM\n25 offers available'),
+                            subtitle: Text('Pickup from ' + current.open +
+                                '-' + current.close + '\n' +
+                                current.offers.toString() +
+                                ' offers available'),
                             isThreeLine: true,
                             trailing: IconButton(
                                 icon: Icon(
