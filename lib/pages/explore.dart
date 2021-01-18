@@ -1,3 +1,5 @@
+import 'package:excessery/pages/cartScreen.dart';
+import 'package:excessery/pages/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -192,28 +194,34 @@ class _ExploreState extends State<Explore> {
                 width: 10,
               ),
             ])),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/pizzahut.png'),
-              title: Text('Pizza Hut Delivery'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 1
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(1);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+        GestureDetector(
+          child: Card(
+            child: ListTile(
+                leading: Image.asset('assets/pizzahut.png'),
+                title: Text('Pizza Hut Delivery'),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                subtitle: Text('Pickup from 8-10PM\n25 offers available'),
+                isThreeLine: true,
+                trailing: IconButton(
+                    icon: Icon(
+                      Icons.favorite_rounded,
+                      color: _selectedIndex != null && _selectedIndex == 1
+                          ? Color(0xff35A2FF)
+                          : Colors.grey,
+                    ),
+                    onPressed: () {
+                      _onSelected(1);
+                    })),
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
           ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RestaurantPage()));
+          },
         ),
         SizedBox(height: screenHeight * 0.01),
         Card(
@@ -310,7 +318,71 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           icon: const Icon(Icons.notifications_none),
           color: Color(0xff35A2FF),
           iconSize: 28.0,
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return new SingleChildScrollView(
+                    child: new ConstrainedBox(
+                      constraints: new BoxConstraints(),
+                      child: new Container(
+                        child: new Center(
+                          child: Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            child: Container(
+                              alignment: Alignment.topRight,
+                              color: Color(0xff324982),
+                              height: 500,
+                              width: 500,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  children: [
+                                    Card(
+                                      child: ListTile(
+                                        leading:
+                                            Image.asset('assets/pizzahut.png'),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 25, vertical: 10),
+                                        subtitle: Text(
+                                            'One of your favorite\nrestaurants just updated their stocks'),
+                                        isThreeLine: true,
+                                      ),
+                                      color: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Card(
+                                      child: ListTile(
+                                        leading:
+                                            Image.asset('assets/pizzahut.png'),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 25, vertical: 10),
+                                        subtitle: Text(
+                                            'One of your favorite\nrestaurants just updated their stocks'),
+                                        isThreeLine: true,
+                                      ),
+                                      color: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                });
+          },
         ),
       ],
     );
