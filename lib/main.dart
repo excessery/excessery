@@ -25,7 +25,7 @@ class _MyAppState extends State<Splash> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(), //change it to login
+            builder: (context) => LogIn(), //change it to login
           ),
         );
       },

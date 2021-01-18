@@ -1,3 +1,4 @@
+import 'package:excessery/pages/homepage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,7 +25,7 @@ class _LogInState extends State<LogIn> {
           return Container(
             color: Color(0xFF737373),
             child: Container(
-              height: 400,
+              height: 600,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -38,18 +39,21 @@ class _LogInState extends State<LogIn> {
                   children: <Widget>[
                     new TextFormField(
                       decoration: new InputDecoration(
-                        prefixIcon: Icon(Icons.mail_outline),
-                        labelText: "Enter your Email",
+                        prefixIcon: Icon(
+                          Icons.mail_outline,
+                          color: Colors.blue,
+                        ),
+                        labelText: "Email",
                         fillColor: Colors.white,
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color(0xff6202ee), width: 1.5),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color(0xff6202ee), width: 1.5),
-                        ),
-                        border: const OutlineInputBorder(),
+                        // enabledBorder: const OutlineInputBorder(
+                        //   borderSide: const BorderSide(
+                        //       color: Color(0xff6202ee), width: 1.5),
+                        // ),
+                        // focusedBorder: const OutlineInputBorder(
+                        //   borderSide: const BorderSide(
+                        //       color: Color(0xff6202ee), width: 1.5),
+                        // ),
+                        // border: const OutlineInputBorder(),
                       ),
                       validator: (val) {
                         if (val.length == 0) {
@@ -61,13 +65,17 @@ class _LogInState extends State<LogIn> {
                     ),
                     new TextFormField(
                       decoration: new InputDecoration(
-                        labelText: "Enter your Password",
-                        fillColor: Colors.white,
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color(0xff6202ee), width: 1.5),
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Colors.blue,
                         ),
-                        border: const OutlineInputBorder(),
+                        labelText: "Password",
+                        fillColor: Colors.white,
+                        //   enabledBorder: const OutlineInputBorder(
+                        //     borderSide: const BorderSide(
+                        //         color: Color(0xff6202ee), width: 1.5),
+                        //   ),
+                        //   border: const OutlineInputBorder(),
                       ),
                       validator: (val) {
                         if (val.length == 0) {
@@ -81,22 +89,24 @@ class _LogInState extends State<LogIn> {
                       height: 10,
                     ),
                     Container(
-                      height: 45,
-                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 1.2,
                       child: RaisedButton(
-                        child: Text(
-                          'LOG IN',
-                          style:
-                              TextStyle(color: Color(0xff6202ee), fontSize: 15),
-                        ),
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28),
-                            side: BorderSide(color: Color(0xff6202ee))),
-                        onPressed: () {
-                          // LOGIN write code here
-                        },
-                      ),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          color: Color(0xff324982),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                            //side: BorderSide(color: Colors.black)
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          }),
                     ),
                   ],
                 ),
@@ -263,7 +273,7 @@ class ImageSliderDemo extends StatelessWidget {
       items: imgList
           .map((item) => Container(
                 child: Center(
-                    child: Image.network(item, fit: BoxFit.cover, width: 1000)),
+                    child: Image.asset(item, fit: BoxFit.cover, width: 1000)),
               ))
           .toList(),
     ));
@@ -278,7 +288,7 @@ final List<Widget> imageSliders = imgList
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: Stack(
                   children: <Widget>[
-                    Image.network(
+                    Image.asset(
                       item,
                     ),
                     Positioned(
