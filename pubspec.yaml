@@ -33,6 +33,7 @@ dependencies:
   sliding_up_panel: ^1.0.2
   percent_indicator: ^2.1.9
   bubble_tab_indicator: "^0.1.4"
+  firebase_database: 6.0.0
 
   
 

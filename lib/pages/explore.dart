@@ -2,6 +2,14 @@ import 'package:excessery/pages/restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'dart:async';
+import 'dart:io' show Platform;
+
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+
 class Explore extends StatefulWidget {
   @override
   _ExploreState createState() => _ExploreState();
@@ -9,10 +17,15 @@ class Explore extends StatefulWidget {
 
 class _ExploreState extends State<Explore> {
   List<Restaurant> restaurants;
+  bool loaded = false;
+
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    if (!loaded)
+      getRestaurantData();
+    loaded = true;
 
     return Scaffold(
       appBar: CustomAppBar(),
@@ -92,10 +105,41 @@ class _ExploreState extends State<Explore> {
     });
   }
 
-  SliverToBoxAdapter _foodList(double screenHeight) {
+  void getRestaurantData() async {
     restaurants = new List<Restaurant>();
-    restaurants.add(new Restaurant("Taco Bell", "8pm", "10pm", 25));
+    Future<Null> throwaway = FirebaseDatabase.instance.reference()
+        .child('eateries').once().then((DataSnapshot snapshot) {
+          List<dynamic> restaurantList = snapshot.value;
+          restaurantList.forEach( (value) {
+            int offers;
+            String name, open, close;
+            Map<dynamic, dynamic> restaurantInfo = value;
+            restaurantInfo.forEach(
+                    (key, value) {
+                      switch (key.toString()) {
+                        case "offers":
+                          offers = int.parse(value.toString());
+                          break;
+                        case "name":
+                          name = value.toString();
+                          break;
+                        case "open":
+                          open = value.toString();
+                          break;
+                        case "close":
+                          close = value.toString();
+                          break;
+                      }
+                    }
+            );
+            restaurants.add(new Restaurant(name, open, close, offers));
+            print(restaurants.toString());
+          });
+          this.setState(() {});
+      });
+  }
 
+  SliverToBoxAdapter _foodList(double screenHeight) {
     return SliverToBoxAdapter(
         child: SingleChildScrollView(
             child: Column(
@@ -200,8 +244,8 @@ class _ExploreState extends State<Explore> {
                       ),
                     ])),
                 Container(
-                  height: 200,
-                  width: 200,
+                  height: 600,
+                  width: 600,
                   child: ListView.builder(
                     itemCount: restaurants.length,
                     itemBuilder: (context, int index) {
