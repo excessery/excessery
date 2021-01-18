@@ -112,7 +112,7 @@ class _ExploreState extends State<Explore> {
           List<dynamic> restaurantList = snapshot.value;
           restaurantList.forEach( (value) {
             int offers;
-            String name, open, close;
+            String name, open, close, icon;
             Map<dynamic, dynamic> restaurantInfo = value;
             restaurantInfo.forEach(
                     (key, value) {
@@ -129,10 +129,13 @@ class _ExploreState extends State<Explore> {
                         case "close":
                           close = value.toString();
                           break;
+                        case "icon":
+                          icon = value.toString();
+                          break;
                       }
                     }
             );
-            restaurants.add(new Restaurant(name, open, close, offers));
+            restaurants.add(new Restaurant(name, open, close, offers, icon));
             print(restaurants.toString());
           });
           this.setState(() {});
@@ -250,7 +253,7 @@ class _ExploreState extends State<Explore> {
                     itemCount: restaurants.length,
                     itemBuilder: (context, int index) {
                       return ListTile(
-                            leading: Image.asset('assets/kfc.png'),
+                            leading: Image.asset(restaurants[index].icon),
                             title: Text(restaurants[index].name),
                             contentPadding:
                             EdgeInsets.symmetric(horizontal: 25, vertical: 10),
