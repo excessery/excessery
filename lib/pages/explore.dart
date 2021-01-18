@@ -200,11 +200,12 @@ class _ExploreState extends State<Explore> {
                       ),
                     ])),
                 Container(
+                  height: 200,
+                  width: 200,
                   child: ListView.builder(
                     itemCount: restaurants.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        child: ListTile(
+                    itemBuilder: (context, int index) {
+                      return ListTile(
                             leading: Image.asset('assets/kfc.png'),
                             title: Text(restaurants[index].name),
                             contentPadding:
@@ -220,12 +221,7 @@ class _ExploreState extends State<Explore> {
                                 ),
                                 onPressed: () {
                                   _onSelected(4);
-                                })),
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      );
+                                }));
                     }
                   )
                 )
