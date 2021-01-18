@@ -270,7 +270,7 @@ class _ExploreState extends State<Explore> {
                                       : Colors.grey,
                                 ),
                                 onPressed: () {
-                                  _onSelected(4);
+                                  _onSelected(index);
                                 }));
                     }
                   )
