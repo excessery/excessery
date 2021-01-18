@@ -1,7 +1,15 @@
-import 'package:excessery/pages/cartScreen.dart';
 import 'package:excessery/pages/restaurant.dart';
+import 'package:excessery/pages/restaurantpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'dart:async';
+import 'dart:io' show Platform;
+
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class Explore extends StatefulWidget {
   @override
@@ -9,9 +17,15 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  List<Restaurant> restaurants;
+  bool loaded = false;
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    if (!loaded) getRestaurantData();
+    loaded = true;
+
     return Scaffold(
       appBar: CustomAppBar(),
       body: CustomScrollView(
@@ -26,57 +40,59 @@ class _ExploreState extends State<Explore> {
 
   SliverToBoxAdapter _buildHeader(double screenHeight) {
     return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          color: Color(0xff324982),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                // Text(
-                //   'Excessery',
-                //   style: const TextStyle(
-                //     color: Colors.white,
-                //     fontSize: 25.0,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
-              ],
-            ),
-            SizedBox(height: screenHeight * 0.03),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'What do you want \nto save for today?',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 27.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                Container(
-                  decoration: BoxDecoration(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+            color: Color(0xff324982),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  // Text(
+                  //   'Excessery',
+                  //   style: const TextStyle(
+                  //     color: Colors.white,
+                  //     fontSize: 25.0,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.03),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'What do you want \nto save for today?',
+                    style: const TextStyle(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: new ListTile(
-                    leading: new Icon(Icons.search),
-                    title: new TextField(
-                      decoration: new InputDecoration(
-                        hintText: 'Find the food or restaurant...',
+                      fontSize: 27.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: new ListTile(
+                      leading: new Icon(Icons.search),
+                      title: new TextField(
+                        decoration: new InputDecoration(
+                          hintText: 'Find the food or restaurant...',
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: screenHeight * 0.03),
-              ],
-            )
-          ],
+                  SizedBox(height: screenHeight * 0.03),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -87,6 +103,43 @@ class _ExploreState extends State<Explore> {
     //https://inducesmile.com/google-flutter/how-to-change-the-background-color-of-selected-listview-in-flutter/
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void getRestaurantData() async {
+    restaurants = new List<Restaurant>();
+    Future<Null> throwaway = FirebaseDatabase.instance
+        .reference()
+        .child('eateries')
+        .once()
+        .then((DataSnapshot snapshot) {
+      List<dynamic> restaurantList = snapshot.value;
+      restaurantList.forEach((value) {
+        int offers;
+        String name, open, close, icon;
+        Map<dynamic, dynamic> restaurantInfo = value;
+        restaurantInfo.forEach((key, value) {
+          switch (key.toString()) {
+            case "offers":
+              offers = int.parse(value.toString());
+              break;
+            case "name":
+              name = value.toString();
+              break;
+            case "open":
+              open = value.toString();
+              break;
+            case "close":
+              close = value.toString();
+              break;
+            case "icon":
+              icon = value.toString();
+              break;
+          }
+        });
+        restaurants.add(new Restaurant(name, open, close, offers, icon));
+      });
+      this.setState(() {});
     });
   }
 
@@ -194,108 +247,47 @@ class _ExploreState extends State<Explore> {
                 width: 10,
               ),
             ])),
-        GestureDetector(
-          child: Card(
-            child: ListTile(
-                leading: Image.asset('assets/pizzahut.png'),
-                title: Text('Pizza Hut Delivery'),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-                isThreeLine: true,
-                trailing: IconButton(
-                    icon: Icon(
-                      Icons.favorite_rounded,
-                      color: _selectedIndex != null && _selectedIndex == 1
-                          ? Color(0xff35A2FF)
-                          : Colors.grey,
-                    ),
-                    onPressed: () {
-                      _onSelected(1);
-                    })),
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
-            ),
-          ),
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => RestaurantPage()));
-          },
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/sushi.png'),
-              title: Text('Sushi Tei, Flavor Bliss'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 2
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(2);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/smile.png'),
-              title: Text('Mister Lie'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 3
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(3);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Card(
-          child: ListTile(
-              leading: Image.asset('assets/kfc.png'),
-              title: Text('KFC'),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              subtitle: Text('Pickup from 8-10PM\n25 offers available'),
-              isThreeLine: true,
-              trailing: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: _selectedIndex != null && _selectedIndex == 4
-                        ? Color(0xff35A2FF)
-                        : Colors.grey,
-                  ),
-                  onPressed: () {
-                    _onSelected(4);
-                  })),
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-        SizedBox(height: screenHeight * 0.01),
+        Container(
+            height: 600,
+            width: 600,
+            child: ListView.builder(
+                itemCount: restaurants.length,
+                itemBuilder: (context, int index) {
+                  Restaurant current = restaurants[index];
+                  return GestureDetector(
+                    child: Card(
+                        child: ListTile(
+                            leading: Image.asset(current.icon),
+                            title: Text(current.name),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 25, vertical: 10),
+                            subtitle: Text('Pickup from ' +
+                                current.open +
+                                '-' +
+                                current.close +
+                                '\n' +
+                                current.offers.toString() +
+                                ' offers available'),
+                            isThreeLine: true,
+                            trailing: IconButton(
+                                icon: Icon(
+                                  Icons.favorite_rounded,
+                                  color: _selectedIndex != null &&
+                                          _selectedIndex == index
+                                      ? Color(0xff35A2FF)
+                                      : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  _onSelected(index);
+                                }))),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestaurantPage()));
+                    },
+                  );
+                }))
       ],
     )));
   }
