@@ -136,7 +136,6 @@ class _ExploreState extends State<Explore> {
                     }
             );
             restaurants.add(new Restaurant(name, open, close, offers, icon));
-            print(restaurants.toString());
           });
           this.setState(() {});
       });
