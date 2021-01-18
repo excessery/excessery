@@ -25,7 +25,7 @@ class _LogInState extends State<LogIn> {
           return Container(
             color: Color(0xFF737373),
             child: Container(
-              height: 600,
+              height: 800,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -35,8 +35,36 @@ class _LogInState extends State<LogIn> {
               child: Container(
                 margin: EdgeInsets.all(30),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Welcome!',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Sign in to continue',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     new TextFormField(
                       decoration: new InputDecoration(
                         prefixIcon: Icon(
@@ -63,6 +91,9 @@ class _LogInState extends State<LogIn> {
                         }
                       },
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     new TextFormField(
                       decoration: new InputDecoration(
                         prefixIcon: Icon(
@@ -86,12 +117,13 @@ class _LogInState extends State<LogIn> {
                       },
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Container(
                       height: 50,
                       width: MediaQuery.of(context).size.width / 1.2,
                       child: RaisedButton(
+                          elevation: 0,
                           child: Text(
                             'Login',
                             style: TextStyle(color: Colors.white, fontSize: 20),
@@ -108,6 +140,42 @@ class _LogInState extends State<LogIn> {
                                     builder: (context) => HomePage()));
                           }),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Forgot Password?',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.black38,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: RaisedButton(
+                        elevation: 0,
+                        child: Text(
+                          'Sign up',
+                          style:
+                              TextStyle(color: Color(0xff35A2FF), fontSize: 20),
+                        ),
+                        color: Color(0xffD2EAFF),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          //side: BorderSide(color: Colors.black)
+                        ),
+                        onPressed: slideSheet1,
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => HomePage()));
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -123,45 +191,174 @@ class _LogInState extends State<LogIn> {
           return Container(
             color: Color(0xFF737373),
             child: Container(
-              height: 180,
+              height: 800,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10)),
                 color: Colors.white,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  TextField(
-                    // controller: email,
-                    decoration: InputDecoration(
-                      border: null,
-                      hintText: "Email",
-                    ),
-                  ),
-                  TextField(
-                    // controller: password,
-                    decoration: InputDecoration(
-                      border: null,
-                      hintText: "Password",
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    child: Text(
-                      "LOGIN",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+              child: Container(
+                margin: EdgeInsets.all(30),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Create an account',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Start your rescue now',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
                       ),
                     ),
-                    onPressed: () {},
-                  ),
-                ],
+                    SizedBox(
+                      height: 10,
+                    ),
+                    new TextFormField(
+                      decoration: new InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.face,
+                          color: Colors.blue,
+                        ),
+                        labelText: "Name",
+                        fillColor: Colors.white,
+                      ),
+                      validator: (val) {
+                        if (val.length == 0) {
+                          return "Name cannot be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    new TextFormField(
+                      decoration: new InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.mail_outline,
+                          color: Colors.blue,
+                        ),
+                        labelText: "Email",
+                        fillColor: Colors.white,
+                        // enabledBorder: const OutlineInputBorder(
+                        //   borderSide: const BorderSide(
+                        //       color: Color(0xff6202ee), width: 1.5),
+                        // ),
+                        // focusedBorder: const OutlineInputBorder(
+                        //   borderSide: const BorderSide(
+                        //       color: Color(0xff6202ee), width: 1.5),
+                        // ),
+                        // border: const OutlineInputBorder(),
+                      ),
+                      validator: (val) {
+                        if (val.length == 0) {
+                          return "Email cannot be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    new TextFormField(
+                      decoration: new InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Colors.blue,
+                        ),
+                        labelText: "Password",
+                        fillColor: Colors.white,
+                        //   enabledBorder: const OutlineInputBorder(
+                        //     borderSide: const BorderSide(
+                        //         color: Color(0xff6202ee), width: 1.5),
+                        //   ),
+                        //   border: const OutlineInputBorder(),
+                      ),
+                      validator: (val) {
+                        if (val.length == 0) {
+                          return "Password cannot be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: RaisedButton(
+                          elevation: 0,
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          color: Color(0xff324982),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                            //side: BorderSide(color: Colors.black)
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          }),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Already have an account?'),
+                        Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width / 4,
+                          child: RaisedButton(
+                              elevation: 0,
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                    color: Color(0xff35A2FF), fontSize: 20),
+                              ),
+                              color: Color(0xffD2EAFF),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                                //side: BorderSide(color: Colors.black)
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()));
+                              }),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           );
