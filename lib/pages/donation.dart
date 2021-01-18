@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
-import 'Charity.dart';
+import 'charity.dart';
 
 class Donation extends StatefulWidget {
   @override
